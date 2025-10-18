@@ -1,0 +1,112 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage/
+
+# Production builds
+build/
+
+# Dependencies
+.pnp
+.pnp.js
+
+# Supabase
+.supabase/
+
+# Package manager lock files (keeping bun.lockb)
+package-lock.json
+yarn.lock
+
+# Spring Boot (Java backend)
+spring-backend/target/
+spring-backend/.mvn/
+spring-backend/mvnw
+spring-backend/mvnw.cmd
+spring-backend/**/*.jar
+spring-backend/**/*.war
+spring-backend/**/*.ear
+spring-backend/**/*.zip
+spring-backend/**/*.tar.gz
+spring-backend/**/*.rar
+
+# Java
+*.class
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+# IDE - IntelliJ IDEA
+*.iws
+*.iml
+*.ipr
+
+# IDE - Eclipse
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+# Spring Boot
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# OS generated files
+Thumbs.db
