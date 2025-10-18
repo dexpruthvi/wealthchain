@@ -1,10 +1,43 @@
-# 🚀 GroupInvest Hub - Smart Investment Platform
+# 🚀 WealthChain - Smart Investment Platform
 
 A comprehensive investment platform with AI-powered portfolio analysis, real-time trading, and a gamified rewards system.
 
 ## ✨ Features
 
-### 💹 **Smart Trading System**
+#### How can I deploy this project?
+
+### � Deployment Options
+
+#### Option 1: Vercel (Recommended)
+1. Push your code to GitHub
+2. Visit [Vercel](https://vercel.com)
+3. Import your GitHub repository
+4. Add environment variables in Vercel dashboard
+5. Deploy automatically
+
+#### Option 2: Netlify
+1. Push your code to GitHub
+2. Visit [Netlify](https://netlify.com)
+3. Connect your GitHub repository
+4. Configure build settings: `bun run build`
+5. Add environment variables
+6. Deploy
+
+#### Option 3: Traditional Hosting
+```bash
+# Build the project
+bun run build
+
+# Upload the dist/ folder to your hosting provider
+```
+
+## Can I connect a custom domain to my project?
+
+Yes! Most hosting providers support custom domains:
+
+- **Vercel**: Go to Project Settings → Domains
+- **Netlify**: Go to Site Settings → Domain Management
+- **Other hosts**: Check their documentation for domain configurationt Trading System**
 - **Real-time Stock Trading**: Buy/sell stocks with live price updates
 - **Visual Transaction Indicators**: Green (+) for purchases, Red (-) for sales
 - **Portfolio Management**: Comprehensive profit/loss tracking
@@ -68,7 +101,7 @@ A comprehensive investment platform with AI-powered portfolio analysis, real-tim
 ```bash
 # Clone the repository
 git clone <YOUR_REPO_URL>
-cd groupinvest-hub
+cd wealthchain
 
 # Install dependencies
 bun install
@@ -132,7 +165,7 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ## 🏗️ Project Structure
 
 ```
-src/
+wealthchain/
 ├── components/          # Reusable UI components
 │   ├── ui/             # shadcn/ui components
 │   ├── StockCard.tsx   # Stock trading cards
@@ -178,11 +211,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **React 18** with TypeScript
+- **Vite** for fast development and building
+- **Tailwind CSS** for styling
+- **shadcn/ui** for beautiful components
+- **Supabase** for backend and authentication
+- **Spring Boot** for advanced analytics API
+- **Bun** for package management
 
 ## How can I deploy this project?
 
