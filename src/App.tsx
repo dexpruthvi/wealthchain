@@ -10,6 +10,7 @@ import Groups from "./pages/Groups";
 import GroupDetail from "./pages/GroupDetail";
 import Portfolio from "./pages/Portfolio";
 import Rewards from "./pages/Rewards";
+import PowerSIP from "./pages/PowerSIP";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/groups/:id" element={<GroupDetail />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/powersip" element={<PowerSIP />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

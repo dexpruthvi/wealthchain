@@ -50,6 +50,11 @@ const Navbar = () => {
               <Link to="/portfolio">
                 <Button variant="ghost">Portfolio</Button>
               </Link>
+              <Link to="/powersip">
+                <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
+                  ⚡ PowerSIP
+                </Button>
+              </Link>
               <Link to="/rewards">
                 <Button variant="ghost" className="text-yellow-600 hover:text-yellow-700">
                   🎁 Rewards
