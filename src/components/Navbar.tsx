@@ -52,12 +52,12 @@ const Navbar = () => {
               </Link>
               <Link to="/powersip">
                 <Button variant="ghost" className="text-purple-600 hover:text-purple-700">
-                  ⚡ PowerSIP
+                  PowerSIP
                 </Button>
               </Link>
               <Link to="/rewards">
                 <Button variant="ghost" className="text-yellow-600 hover:text-yellow-700">
-                  🎁 Rewards
+                  Rewards
                 </Button>
               </Link>
               <Button variant="ghost" size="icon" onClick={() => navigate("/profile")}>

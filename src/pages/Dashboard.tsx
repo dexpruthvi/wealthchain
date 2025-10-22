@@ -7,7 +7,8 @@ import QuickHealthScore from "@/components/QuickHealthScore";
 import StockMarketNews from "@/components/StockMarketNews";
 import RewardsTokenSystem from "@/components/RewardsTokenSystem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Wallet, Users, ArrowUpRight, Activity } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, Wallet, Users, ArrowUpRight, Activity, Building2, Zap, Gift } from "lucide-react";
 import { toast } from "sonner";
 import { priceService } from "@/services/realTimePriceService";
 
@@ -208,6 +209,48 @@ const Dashboard = () => {
           <div>
             <RewardsTokenSystem />
           </div>
+        </div>
+
+        {/* Quick Access Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="border-blue-200 bg-blue-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/large-deals")}>
+            <CardContent className="p-6 text-center">
+              <Building2 className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-blue-800 mb-2">NSE Large Deals</h3>
+              <p className="text-sm text-blue-700">
+                Track institutional block deals and bulk transactions in real-time
+              </p>
+              <Button variant="outline" className="mt-4 text-blue-600 border-blue-300">
+                View Large Deals →
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-200 bg-purple-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/powersip")}>
+            <CardContent className="p-6 text-center">
+              <Zap className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-purple-800 mb-2">PowerSIP Journey</h3>
+              <p className="text-sm text-purple-700">
+                Gamified SIP investments with NFT rewards and level progression
+              </p>
+              <Button variant="outline" className="mt-4 text-purple-600 border-purple-300">
+                Start Journey →
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-yellow-200 bg-yellow-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/rewards")}>
+            <CardContent className="p-6 text-center">
+              <Gift className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">Rewards & Tokens</h3>
+              <p className="text-sm text-yellow-700">
+                Earn tokens through investments and redeem premium vouchers
+              </p>
+              <Button variant="outline" className="mt-4 text-yellow-600 border-yellow-300">
+                Earn Rewards →
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
