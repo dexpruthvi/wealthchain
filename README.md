@@ -8,6 +8,7 @@ A comprehensive investment platform with AI-powered portfolio analysis, real-tim
 - **Visual Transaction Indicators**: Green (+) for purchases, Red (-) for sales
 - **Portfolio Management**: Comprehensive profit/loss tracking
 - **Live Price Feed**: Stock prices update every 3 seconds
+- **NSE Large Deals**: Real-time institutional trading tracker with advanced filtering
 
 ###  **AI Investment Intelligence**
 - **Investment Health Score**: 4-metric scoring system (0-100)
@@ -20,6 +21,16 @@ A comprehensive investment platform with AI-powered portfolio analysis, real-tim
 - **Category Filtering**: Technology, Finance, Energy, Healthcare, etc.
 - **Sentiment Analysis**: News categorized by market impact
 - **Auto-refresh**: Latest market updates every few minutes
+
+###  **NSE Large Deals Tracker**
+- **Real-time Deal Monitoring**: Live tracking of institutional block and bulk deals
+- **Market Summary Dashboard**: Total deals, volume, and buy/sell breakdown analytics  
+- **Advanced Filtering**: Filter deals by sector (IT, Banking, Energy, etc.) and deal type
+- **Institutional Insights**: Track major institutional clients and their trading patterns
+- **Deal Categories**: Comprehensive coverage of both Block Deals and Bulk Deals
+- **Auto-refresh Updates**: New deals appear every 15-45 seconds automatically
+- **Professional Data Display**: Large numbers formatted in Crores/Lakhs for easy reading
+- **Time Tracking**: Shows how long ago each deal occurred with relative timestamps
 
 ###  **Rewards & Gamification**
 - **Token Economy**: Earn 0.001 tokens per ₹1 invested (scarce economy)
@@ -126,7 +137,9 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 5. **Get AI Insights**: Use the AI planner for recommendations
 6. **Read News**: Stay updated with market news
 7. **Earn Rewards**: Collect tokens and redeem vouchers
-8. **Track Progress**: Monitor your portfolio performance
+8. **Monitor Large Deals**: Track institutional trading activity and market sentiment
+9. **Filter by Sector**: Focus on specific sectors or deal types for targeted insights
+10. **Track Progress**: Monitor your portfolio performance
 
 ##  Project Structure
 
@@ -140,10 +153,14 @@ wealthchain/
 │   ├── Dashboard.tsx   # Main dashboard
 │   ├── Portfolio.tsx   # Portfolio management
 │   ├── Groups.tsx      # Investment groups
+│   ├── LargeDeals.tsx  # NSE large deals tracker
 │   └── ...
 ├── hooks/              # Custom React hooks
 ├── integrations/       # External service integrations
 │   └── supabase/      # Supabase client and types
+├── services/           # Business logic and data services
+│   ├── nseLargeDealsService.ts  # NSE deals data management
+│   └── ...
 ├── lib/               # Utility functions
 └── ...
 
