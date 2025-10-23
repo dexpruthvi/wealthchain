@@ -12,6 +12,7 @@ import GroupDetail from "./pages/GroupDetail";
 import Portfolio from "./pages/Portfolio";
 import Rewards from "./pages/Rewards";
 import PowerSIP from "./pages/PowerSIP";
+import LargeDeals from "./pages/LargeDeals";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/powersip" element={<PowerSIP />} />
+          <Route path="/large-deals" element={<LargeDeals />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

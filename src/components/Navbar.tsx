@@ -55,6 +55,11 @@ const Navbar = () => {
                   PowerSIP
                 </Button>
               </Link>
+              <Link to="/large-deals">
+                <Button variant="ghost" className="text-blue-600 hover:text-blue-700">
+                  Large Deals
+                </Button>
+              </Link>
               <Link to="/rewards">
                 <Button variant="ghost" className="text-yellow-600 hover:text-yellow-700">
                   Rewards

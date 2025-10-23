@@ -1,0 +1,261 @@
+// NSE Large Deals Service
+// In a real implementation, this would connect to NSE API or data provider
+
+export interface LargeDealData {
+    id: string;
+    symbol: string;
+    companyName: string;
+    dealType: 'Buy' | 'Sell';
+    quantity: number;
+    price: number;
+    totalValue: number;
+    timestamp: string;
+    exchange: string;
+    sector: string;
+    priceChange: number;
+    percentChange: number;
+    clientName?: string;
+    dealCategory: 'Block Deal' | 'Bulk Deal';
+}
+
+class NSELargeDealsService {
+    private static instance: NSELargeDealsService;
+    private subscribers: (() => void)[] = [];
+    private deals: LargeDealData[] = [];
+
+    private constructor() {
+        this.generateInitialDeals();
+    }
+
+    static getInstance(): NSELargeDealsService {
+        if (!NSELargeDealsService.instance) {
+            NSELargeDealsService.instance = new NSELargeDealsService();
+        }
+        return NSELargeDealsService.instance;
+    }
+
+    private nifty50Stocks = [
+        { symbol: 'RELIANCE', name: 'Reliance Industries Ltd', sector: 'Energy', basePrice: 2850 },
+        { symbol: 'TCS', name: 'Tata Consultancy Services Ltd', sector: 'IT', basePrice: 4150 },
+        { symbol: 'INFY', name: 'Infosys Ltd', sector: 'IT', basePrice: 1750 },
+        { symbol: 'HDFCBANK', name: 'HDFC Bank Ltd', sector: 'Banking', basePrice: 1650 },
+        { symbol: 'ICICIBANK', name: 'ICICI Bank Ltd', sector: 'Banking', basePrice: 1200 },
+        { symbol: 'HINDUNILVR', name: 'Hindustan Unilever Ltd', sector: 'FMCG', basePrice: 2450 },
+        { symbol: 'ITC', name: 'ITC Ltd', sector: 'FMCG', basePrice: 485 },
+        { symbol: 'KOTAKBANK', name: 'Kotak Mahindra Bank Ltd', sector: 'Banking', basePrice: 1750 },
+        { symbol: 'LT', name: 'Larsen & Toubro Ltd', sector: 'Construction', basePrice: 3650 },
+        { symbol: 'ASIANPAINT', name: 'Asian Paints Ltd', sector: 'Paints', basePrice: 2850 },
+        { symbol: 'MARUTI', name: 'Maruti Suzuki India Ltd', sector: 'Auto', basePrice: 11500 },
+        { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical Industries Ltd', sector: 'Pharma', basePrice: 1750 },
+        { symbol: 'TITAN', name: 'Titan Company Ltd', sector: 'Jewellery', basePrice: 3250 },
+        { symbol: 'NESTLEIND', name: 'Nestle India Ltd', sector: 'FMCG', basePrice: 2200 },
+        { symbol: 'ULTRACEMCO', name: 'UltraTech Cement Ltd', sector: 'Cement', basePrice: 11200 },
+        { symbol: 'WIPRO', name: 'Wipro Ltd', sector: 'IT', basePrice: 565 },
+        { symbol: 'BAJFINANCE', name: 'Bajaj Finance Ltd', sector: 'NBFC', basePrice: 6850 },
+        { symbol: 'ONGC', name: 'Oil & Natural Gas Corporation Ltd', sector: 'Energy', basePrice: 285 },
+        { symbol: 'NTPC', name: 'NTPC Ltd', sector: 'Power', basePrice: 385 },
+        { symbol: 'POWERGRID', name: 'Power Grid Corporation Ltd', sector: 'Power', basePrice: 325 }
+    ];
+
+    private institutionalClients = [
+        'Morgan Stanley Asia',
+        'Goldman Sachs India',
+        'Citigroup Global Markets',
+        'HDFC Mutual Fund',
+        'SBI Mutual Fund',
+        'ICICI Prudential MF',
+        'Axis Mutual Fund',
+        'Kotak Mutual Fund',
+        'Aditya Birla Sun Life MF',
+        'UTI Mutual Fund',
+        'LIC of India',
+        'EPFO',
+        'Foreign Portfolio Investor',
+        'Domestic Institutional Investor'
+    ];
+
+    private generateInitialDeals(): void {
+        const deals: LargeDealData[] = [];
+        const now = new Date();
+
+        // Generate 30 realistic large deals
+        for (let i = 0; i < 30; i++) {
+            const stock = this.nifty50Stocks[Math.floor(Math.random() * this.nifty50Stocks.length)];
+            const dealType = Math.random() > 0.5 ? 'Buy' : 'Sell';
+
+            // Price variation around base price
+            const priceVariation = (Math.random() - 0.5) * 0.1; // ±5% variation
+            const currentPrice = stock.basePrice * (1 + priceVariation);
+
+            // Large quantities for institutional deals
+            const baseQuantity = Math.floor(Math.random() * 5) + 1; // 1-5
+            const multiplier = [50000, 100000, 200000, 500000, 1000000]; // Large volumes
+            const quantity = baseQuantity * multiplier[Math.floor(Math.random() * multiplier.length)];
+
+            const totalValue = currentPrice * quantity;
+            const priceChange = (Math.random() - 0.5) * 50; // Price change in rupees
+            const percentChange = (priceChange / currentPrice) * 100;
+
+            // Random timestamp within last 6 hours
+            const timestamp = new Date(now.getTime() - Math.random() * 6 * 60 * 60 * 1000);
+
+            deals.push({
+                id: `nse_deal_${Date.now()}_${i}`,
+                symbol: stock.symbol,
+                companyName: stock.name,
+                dealType,
+                quantity,
+                price: Number(currentPrice.toFixed(2)),
+                totalValue: Number(totalValue.toFixed(2)),
+                timestamp: timestamp.toISOString(),
+                exchange: 'NSE',
+                sector: stock.sector,
+                priceChange: Number(priceChange.toFixed(2)),
+                percentChange: Number(percentChange.toFixed(2)),
+                clientName: this.institutionalClients[Math.floor(Math.random() * this.institutionalClients.length)],
+                dealCategory: Math.random() > 0.6 ? 'Block Deal' : 'Bulk Deal'
+            });
+        }
+
+        // Sort by timestamp (newest first)
+        this.deals = deals.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    }
+
+    // Simulate real-time updates
+    private updateDeals(): void {
+        // Add 1-3 new deals
+        const newDealsCount = Math.floor(Math.random() * 3) + 1;
+
+        for (let i = 0; i < newDealsCount; i++) {
+            const stock = this.nifty50Stocks[Math.floor(Math.random() * this.nifty50Stocks.length)];
+            const dealType = Math.random() > 0.5 ? 'Buy' : 'Sell';
+
+            const priceVariation = (Math.random() - 0.5) * 0.08;
+            const currentPrice = stock.basePrice * (1 + priceVariation);
+
+            const baseQuantity = Math.floor(Math.random() * 3) + 1;
+            const multiplier = [75000, 150000, 300000, 750000];
+            const quantity = baseQuantity * multiplier[Math.floor(Math.random() * multiplier.length)];
+
+            const totalValue = currentPrice * quantity;
+            const priceChange = (Math.random() - 0.5) * 40;
+            const percentChange = (priceChange / currentPrice) * 100;
+
+            const newDeal: LargeDealData = {
+                id: `nse_deal_${Date.now()}_${Math.random()}`,
+                symbol: stock.symbol,
+                companyName: stock.name,
+                dealType,
+                quantity,
+                price: Number(currentPrice.toFixed(2)),
+                totalValue: Number(totalValue.toFixed(2)),
+                timestamp: new Date().toISOString(),
+                exchange: 'NSE',
+                sector: stock.sector,
+                priceChange: Number(priceChange.toFixed(2)),
+                percentChange: Number(percentChange.toFixed(2)),
+                clientName: this.institutionalClients[Math.floor(Math.random() * this.institutionalClients.length)],
+                dealCategory: Math.random() > 0.7 ? 'Block Deal' : 'Bulk Deal'
+            };
+
+            this.deals.unshift(newDeal);
+        }
+
+        // Keep only latest 50 deals
+        this.deals = this.deals.slice(0, 50);
+
+        // Notify subscribers
+        this.notifySubscribers();
+    }
+
+    getLargeDeals(): LargeDealData[] {
+        return [...this.deals];
+    }
+
+    startRealTimeUpdates(): void {
+        // Update deals every 15-45 seconds (random interval)
+        const updateInterval = () => {
+            this.updateDeals();
+            const nextUpdate = 15000 + Math.random() * 30000; // 15-45 seconds
+            setTimeout(updateInterval, nextUpdate);
+        };
+
+        setTimeout(updateInterval, 5000); // Start after 5 seconds
+    }
+
+    subscribe(callback: () => void): () => void {
+        this.subscribers.push(callback);
+
+        // Return unsubscribe function
+        return () => {
+            const index = this.subscribers.indexOf(callback);
+            if (index > -1) {
+                this.subscribers.splice(index, 1);
+            }
+        };
+    }
+
+    private notifySubscribers(): void {
+        this.subscribers.forEach(callback => callback());
+    }
+
+    // Get deals by sector
+    getDealsBySector(sector: string): LargeDealData[] {
+        if (sector === 'all') return this.getLargeDeals();
+        return this.deals.filter(deal => deal.sector === sector);
+    }
+
+    // Get deals by type
+    getDealsByType(type: string): LargeDealData[] {
+        if (type === 'all') return this.getLargeDeals();
+        return this.deals.filter(deal => deal.dealType === type);
+    }
+
+    // Get top deals by value
+    getTopDealsByValue(limit: number = 10): LargeDealData[] {
+        return [...this.deals]
+            .sort((a, b) => b.totalValue - a.totalValue)
+            .slice(0, limit);
+    }
+
+    // Get market summary
+    getMarketSummary() {
+        const deals = this.getLargeDeals();
+        const totalVolume = deals.reduce((sum, deal) => sum + deal.totalValue, 0);
+        const buyDeals = deals.filter(deal => deal.dealType === 'Buy');
+        const sellDeals = deals.filter(deal => deal.dealType === 'Sell');
+
+        return {
+            totalDeals: deals.length,
+            totalVolume,
+            buyDeals: buyDeals.length,
+            sellDeals: sellDeals.length,
+            buyVolume: buyDeals.reduce((sum, deal) => sum + deal.totalValue, 0),
+            sellVolume: sellDeals.reduce((sum, deal) => sum + deal.totalValue, 0),
+            sectors: [...new Set(deals.map(deal => deal.sector))],
+            topSector: this.getTopSectorByVolume(deals)
+        };
+    }
+
+    private getTopSectorByVolume(deals: LargeDealData[]): string {
+        const sectorVolumes: { [key: string]: number } = {};
+
+        deals.forEach(deal => {
+            if (!sectorVolumes[deal.sector]) {
+                sectorVolumes[deal.sector] = 0;
+            }
+            sectorVolumes[deal.sector] += deal.totalValue;
+        });
+
+        return Object.keys(sectorVolumes).reduce((a, b) =>
+            sectorVolumes[a] > sectorVolumes[b] ? a : b,
+            Object.keys(sectorVolumes)[0] || 'IT'
+        );
+    }
+}
+
+// Export singleton instance
+export const nseLargeDealsService = NSELargeDealsService.getInstance();
+
+// Start real-time updates when service is imported
+nseLargeDealsService.startRealTimeUpdates();
