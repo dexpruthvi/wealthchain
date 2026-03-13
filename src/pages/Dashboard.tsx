@@ -8,7 +8,7 @@ import StockMarketNews from "@/components/StockMarketNews";
 import RewardsTokenSystem from "@/components/RewardsTokenSystem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Wallet, Users, ArrowUpRight, Activity, Building2, Zap, Gift } from "lucide-react";
+import { TrendingUp, Wallet, Users, ArrowUpRight, Activity, Building2, Zap, Gift, Vote } from "lucide-react";
 import { toast } from "sonner";
 import { priceService } from "@/services/realTimePriceService";
 
@@ -212,7 +212,33 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Access Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="border-indigo-200 bg-indigo-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/blockchain")}>
+            <CardContent className="p-6 text-center">
+              <Wallet className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-indigo-800 mb-2">Web3 Wallet</h3>
+              <p className="text-sm text-indigo-700">
+                Connect your wallet, stake WCH tokens, claim NFTs and view on-chain portfolio
+              </p>
+              <Button variant="outline" className="mt-4 text-indigo-600 border-indigo-300">
+                Open Wallet →
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="border-violet-200 bg-violet-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/dao")}>
+            <CardContent className="p-6 text-center">
+              <Vote className="w-12 h-12 text-violet-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-violet-800 mb-2">DAO Governance</h3>
+              <p className="text-sm text-violet-700">
+                Vote on investment decisions with governance tokens in decentralized groups
+              </p>
+              <Button variant="outline" className="mt-4 text-violet-600 border-violet-300">
+                View DAOs →
+              </Button>
+            </CardContent>
+          </Card>
+
           <Card className="border-blue-200 bg-blue-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/large-deals")}>
             <CardContent className="p-6 text-center">
               <Building2 className="w-12 h-12 text-blue-600 mx-auto mb-4" />
@@ -235,19 +261,6 @@ const Dashboard = () => {
               </p>
               <Button variant="outline" className="mt-4 text-purple-600 border-purple-300">
                 Start Journey →
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="border-yellow-200 bg-yellow-50 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate("/rewards")}>
-            <CardContent className="p-6 text-center">
-              <Gift className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-yellow-800 mb-2">Rewards & Tokens</h3>
-              <p className="text-sm text-yellow-700">
-                Earn tokens through investments and redeem premium vouchers
-              </p>
-              <Button variant="outline" className="mt-4 text-yellow-600 border-yellow-300">
-                Earn Rewards →
               </Button>
             </CardContent>
           </Card>

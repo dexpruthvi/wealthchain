@@ -13,6 +13,8 @@ import Portfolio from "./pages/Portfolio";
 import Rewards from "./pages/Rewards";
 import PowerSIP from "./pages/PowerSIP";
 import LargeDeals from "./pages/LargeDeals";
+import BlockchainWallet from "./pages/BlockchainWallet";
+import DAOGovernance from "./pages/DAOGovernance";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/powersip" element={<PowerSIP />} />
           <Route path="/large-deals" element={<LargeDeals />} />
+          <Route path="/blockchain" element={<BlockchainWallet />} />
+          <Route path="/dao" element={<DAOGovernance />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
