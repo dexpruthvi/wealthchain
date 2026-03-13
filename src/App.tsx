@@ -13,6 +13,7 @@ import Portfolio from "./pages/Portfolio";
 import Rewards from "./pages/Rewards";
 import PowerSIP from "./pages/PowerSIP";
 import LargeDeals from "./pages/LargeDeals";
+import BlockchainWallet from "./pages/BlockchainWallet";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
