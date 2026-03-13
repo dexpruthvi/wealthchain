@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, User, LogOut } from "lucide-react";
+import { TrendingUp, User, LogOut, Wallet, Vote } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { User as SupabaseUser } from "@supabase/supabase-js";
@@ -58,6 +58,18 @@ const Navbar = () => {
               <Link to="/large-deals">
                 <Button variant="ghost" className="text-blue-600 hover:text-blue-700">
                   Large Deals
+                </Button>
+              </Link>
+              <Link to="/blockchain">
+                <Button variant="ghost" className="text-indigo-600 hover:text-indigo-700 font-semibold">
+                  <Wallet className="w-4 h-4 mr-1" />
+                  Web3 Wallet
+                </Button>
+              </Link>
+              <Link to="/dao">
+                <Button variant="ghost" className="text-violet-600 hover:text-violet-700 font-semibold">
+                  <Vote className="w-4 h-4 mr-1" />
+                  DAO
                 </Button>
               </Link>
               <Link to="/rewards">
